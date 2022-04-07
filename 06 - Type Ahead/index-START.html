@@ -20,7 +20,7 @@ const endpoint = 'https://raw.githubusercontent.com/pensnarik/russian-cities/mas
 const names = [];
 fetch(endpoint)
   .then(blob => blob.json())
-  .then(data =>cities.push(...data));
+  .then(data =>names.push(...data));
 
   function findMatches(wordToMatch, names) {
     return names.filter(place => {
@@ -39,11 +39,14 @@ fetch(endpoint)
       const regex = new RegExp(this.value, 'gi');
       const cityName = place.name.replace(regex, `<span class="h1">${this.value}</span>`);
       const stateName = place.subject.replace(regex, `<span class="h1">${this.value}</span>`);
+      const lonName = place.coords.lon.replace(regex, this.value);
+      const latName = place.coords.lat.replace(regex, this.value);
       return `
       <li>
-        <span class="name">${cityName}, ${stateName}</span>
+        <span class="name">${cityName}, ${stateName} , ${lonName}, ${latName}</span>
         <span class="population">${numberWithCommas(place.population)}</span>
       </li>
+      <a href = https://yandex.ru/maps/?ll=${lon},${lat}&z=13>Показать на карте</a>
       `;
     }).join('');
     suggestions.innerHTML = html;
