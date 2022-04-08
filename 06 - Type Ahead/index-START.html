@@ -43,10 +43,10 @@ fetch(endpoint)
       const latName = place.coords.lat.replace(regex, this.value);
       return `
       <li>
-        <span class="name">${cityName}, ${stateName} , ${lonName}, ${latName}</span>
+        <span class="name">${cityName}, ${stateName}</span>
         <span class="population">${numberWithCommas(place.population)}</span>
       </li>
-      <a href = https://yandex.ru/maps/?ll=${lon},${lat}&z=13>Показать на карте</a>
+      <a href = "https://yandex.ru/maps/?ll=${lonName},${latName}&z=13">Показать на карте</a>
       `;
     }).join('');
     suggestions.innerHTML = html;
